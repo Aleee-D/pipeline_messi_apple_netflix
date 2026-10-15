@@ -1,0 +1,121 @@
+Temporada,Competicion,Jornada,Fecha,Estadio,Club,Adversario,Resultado,Minuto,Tipo_Gol
+2020-21,LaLiga,Jornada 2,2021-01-06,San Mames,FC Barcelona,Athletic Bilbao,3-2,38',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 2,2021-01-06,San Mames,FC Barcelona,Athletic Bilbao,3-2,90',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 18,2021-01-09,Nuevo Los Carmenes,FC Barcelona,Granada CF,4-0,35',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 18,2021-01-09,Nuevo Los Carmenes,FC Barcelona,Granada CF,4-0,42',Tiro libre
+2020-21,LaLiga,Jornada 21,2021-01-31,Camp Nou,FC Barcelona,Athletic Bilbao,2-1,20',Tiro libre
+2020-21,LaLiga,Jornada 22,2021-02-07,Benito Villamarin,FC Barcelona,Real Betis,3-2,59',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 23,2021-02-13,Camp Nou,FC Barcelona,Deportivo Alaves,5-1,45+1',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 23,2021-02-13,Camp Nou,FC Barcelona,Deportivo Alaves,5-1,75',Tiro con pie izquierdo
+2020-21,Champions League,Octavos Ida,2021-02-16,Camp Nou,FC Barcelona,Paris Saint-Germain,1-4,27',Penal
+2020-21,LaLiga,Jornada 24,2021-02-21,Camp Nou,FC Barcelona,Cadiz CF,1-1,32',Penal
+2020-21,LaLiga,Jornada 1,2021-02-24,Camp Nou,FC Barcelona,Elche CF,3-0,48',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 1,2021-02-24,Camp Nou,FC Barcelona,Elche CF,3-0,69',Tiro con pie derecho
+2020-21,LaLiga,Jornada 25,2021-02-27,Ramon Sanchez-Pizjuan,FC Barcelona,Sevilla FC,2-0,85',Tiro con pie izquierdo
+2020-21,Champions League,Octavos Vuelta,2021-03-10,Parc des Princes,FC Barcelona,Paris Saint-Germain,1-1,37',Tiro lejano
+2020-21,LaLiga,Jornada 27,2021-03-15,Camp Nou,FC Barcelona,SD Huesca,4-1,13',Tiro lejano
+2020-21,LaLiga,Jornada 27,2021-03-15,Camp Nou,FC Barcelona,SD Huesca,4-1,90',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 28,2021-03-21,Reale Arena,FC Barcelona,Real Sociedad,6-1,56',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 28,2021-03-21,Reale Arena,FC Barcelona,Real Sociedad,6-1,89',Tiro con pie izquierdo
+2020-21,Copa del Rey,Final,2021-04-17,La Cartuja,FC Barcelona,Athletic Bilbao,4-0,68',Tiro con pie izquierdo
+2020-21,Copa del Rey,Final,2021-04-17,La Cartuja,FC Barcelona,Athletic Bilbao,4-0,72',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 31,2021-04-22,Camp Nou,FC Barcelona,Getafe CF,5-2,8',Tiro con pie izquierdo
+2020-21,LaLiga,Jornada 31,2021-04-22,Camp Nou,FC Barcelona,Getafe CF,5-2,33',Tiro con pie derecho
+2020-21,LaLiga,Jornada 34,2021-05-02,Mestalla,FC Barcelona,Valencia CF,3-2,57',Rebote
+2020-21,LaLiga,Jornada 34,2021-05-02,Mestalla,FC Barcelona,Valencia CF,3-2,69',Tiro libre
+2020-21,LaLiga,Jornada 36,2021-05-11,Ciutat de Valencia,FC Barcelona,Levante UD,3-3,25',Volea
+2020-21,LaLiga,Jornada 37,2021-05-16,Camp Nou,FC Barcelona,Celta de Vigo,1-2,28',Cabezazo
+2021-22,Champions League,Grupo A,2021-09-28,Parc des Princes,Paris Saint-Germain,Manchester City,2-0,74',Tiro colocado
+2021-22,Champions League,Grupo A,2021-10-19,Parc des Princes,Paris Saint-Germain,RB Leipzig,3-2,67',Tiro con pie izquierdo
+2021-22,Champions League,Grupo A,2021-10-19,Parc des Princes,Paris Saint-Germain,RB Leipzig,3-2,74',Penal Panenka
+2021-22,Ligue 1,Jornada 14,2021-11-20,Parc des Princes,Paris Saint-Germain,FC Nantes,3-1,87',Tiro colocado
+2021-22,Champions League,Grupo A,2021-12-07,Parc des Princes,Paris Saint-Germain,Club Brugge,4-1,38',Tiro lejano
+2021-22,Champions League,Grupo A,2021-12-07,Parc des Princes,Paris Saint-Germain,Club Brugge,4-1,76',Penal
+2021-22,Ligue 1,Jornada 23,2022-02-06,Pierre-Mauroy,Paris Saint-Germain,Lille OSC,5-1,38',Tiro colocado
+2021-22,Ligue 1,Jornada 34,2022-04-23,Parc des Princes,Paris Saint-Germain,RC Lens,1-1,68',Tiro lejano
+2021-22,Ligue 1,Jornada 37,2022-05-14,Stade de la Mosson,Paris Saint-Germain,Montpellier HSC,4-0,6',Tiro con pie izquierdo
+2021-22,Ligue 1,Jornada 37,2022-05-14,Stade de la Mosson,Paris Saint-Germain,Montpellier HSC,4-0,20',Regate al arquero
+2022-23,Ligue 1,Jornada 1,2022-08-06,Gabriel Montpied,Paris Saint-Germain,Clermont Foot,5-0,80',Tiro colocado
+2022-23,Ligue 1,Jornada 1,2022-08-06,Gabriel Montpied,Paris Saint-Germain,Clermont Foot,5-0,86',Chilena
+2022-23,Ligue 1,Jornada 3,2022-08-21,Pierre-Mauroy,Paris Saint-Germain,Lille OSC,7-1,27',Tiro con pie derecho
+2022-23,Champions League,Grupo H,2022-09-14,Sammy Ofer,Paris Saint-Germain,Maccabi Haifa,3-1,37',Tiro con pie izquierdo
+2022-23,Ligue 1,Jornada 8,2022-09-18,Groupama Stadium,Paris Saint-Germain,Olympique Lyon,1-0,5',Tiro colocado
+2022-23,Ligue 1,Jornada 9,2022-10-01,Parc des Princes,Paris Saint-Germain,OGC Nice,2-1,29',Tiro libre
+2022-23,Champions League,Grupo H,2022-10-05,Da Luz,Paris Saint-Germain,SL Benfica,1-1,22',Tiro colocado a la escuadra
+2022-23,Champions League,Grupo H,2022-10-25,Parc des Princes,Paris Saint-Germain,Maccabi Haifa,7-2,19',Tiro con efecto
+2022-23,Champions League,Grupo H,2022-10-25,Parc des Princes,Paris Saint-Germain,Maccabi Haifa,7-2,44',Tiro raso
+2022-23,Ligue 1,Jornada 13,2022-10-29,Parc des Princes,Paris Saint-Germain,ESTAC Troyes,4-3,55',Tiro lejano
+2022-23,Ligue 1,Jornada 18,2023-01-11,Parc des Princes,Paris Saint-Germain,Angers SCO,2-0,72',Tiro con pie derecho
+2022-23,Ligue 1,Jornada 21,2023-02-01,Stade de la Mosson,Paris Saint-Germain,Montpellier HSC,3-1,72',Definicion sutil
+2022-23,Ligue 1,Jornada 22,2023-02-04,Parc des Princes,Paris Saint-Germain,Toulouse FC,2-1,58',Tiro colocado
+2022-23,Ligue 1,Jornada 24,2023-02-19,Parc des Princes,Paris Saint-Germain,Lille OSC,4-3,90+5',Tiro libre agónico
+2022-23,Ligue 1,Jornada 26,2023-03-04,Parc des Princes,Paris Saint-Germain,FC Nantes,4-2,12',Anticipacion
+2022-23,Ligue 1,Jornada 30,2023-04-08,Allianz Riviera,Paris Saint-Germain,OGC Nice,2-0,26',Remate en el area
+2022-23,Ligue 1,Jornada 31,2023-04-15,Parc des Princes,Paris Saint-Germain,RC Lens,3-1,40',Tiro cruzado
+2022-23,Ligue 1,Jornada 37,2023-05-27,Meinau,Paris Saint-Germain,RC Strasbourg,1-1,59',Tiro colocado
+2023,Leagues Cup,Fase Grupos,2023-07-21,DRV PNK Stadium,Inter Miami CF,Cruz Azul,2-1,90+4',Tiro libre magistral
+2023,Leagues Cup,Fase Grupos,2023-07-25,DRV PNK Stadium,Inter Miami CF,Atlanta United,4-0,8',Rebote tras remate
+2023,Leagues Cup,Fase Grupos,2023-07-25,DRV PNK Stadium,Inter Miami CF,Atlanta United,4-0,22',Tiro con pie derecho
+2023,Leagues Cup,Dieciseisavos,2023-08-02,DRV PNK Stadium,Inter Miami CF,Orlando City,3-1,7',Volea con pecho y zurda
+2023,Leagues Cup,Dieciseisavos,2023-08-02,DRV PNK Stadium,Inter Miami CF,Orlando City,3-1,72',Volea con derecha
+2023,Leagues Cup,Octavos,2023-08-06,Toyota Stadium,Inter Miami CF,FC Dallas,4-4 (5-3 p),6',Tiro raso pegado al palo
+2023,Leagues Cup,Octavos,2023-08-06,Toyota Stadium,Inter Miami CF,FC Dallas,4-4 (5-3 p),85',Tiro libre a la escuadra
+2023,Leagues Cup,Cuartos,2023-08-11,DRV PNK Stadium,Inter Miami CF,Charlotte FC,4-0,86',Remate al centro del arco
+2023,Leagues Cup,Semifinal,2023-08-15,Subaru Park,Inter Miami CF,Philadelphia Union,4-1,20',Tiro lejano 32 metros
+2023,Leagues Cup,Final,2023-08-19,GEODIS Park,Inter Miami CF,Nashville SC,1-1 (10-9 p),23',Zurdazo al angulo
+2023,MLS,Semana 28,2023-08-26,Red Bull Arena,Inter Miami CF,New York Red Bulls,2-0,89',Pase magistral y toque sutil
+2024,MLS,Semana 2,2024-02-25,Dignity Health Sports Park,Inter Miami CF,LA Galaxy,1-1,90+2',Pared con Alba y definicion
+2024,MLS,Semana 3,2024-03-02,Chase Stadium,Inter Miami CF,Orlando City,5-0,57',Pase de pecho de Suarez
+2024,MLS,Semana 3,2024-03-02,Chase Stadium,Inter Miami CF,Orlando City,5-0,62',Cabezazo al palo cruzado
+2024,MLS,Semana 8,2024-04-06,Chase Stadium,Inter Miami CF,Colorado Rapids,2-2,57',Zurdazo raso al segundo poste
+2024,MLS,Semana 9,2024-04-13,Arrowhead Stadium,Inter Miami CF,Sporting Kansas City,3-2,51',Bombazo de fuera del area
+2024,MLS,Semana 10,2024-04-20,Chase Stadium,Inter Miami CF,Nashville SC,3-1,11',Pelea de balon y definicion
+2024,MLS,Semana 10,2024-04-20,Chase Stadium,Inter Miami CF,Nashville SC,3-1,81',Penal con frialdad
+2024,MLS,Semana 11,2024-04-27,Gillette Stadium,Inter Miami CF,New England Revolution,4-1,32',Control y zurdazo suave
+2024,MLS,Semana 11,2024-04-27,Gillette Stadium,Inter Miami CF,New England Revolution,4-1,68',Pase de Busquets y toque sutil
+2024,MLS,Semana 12,2024-05-04,Chase Stadium,Inter Miami CF,New York Red Bulls,6-2,50',Asistencia de Suarez y tiro colocado
+2024,MLS,Semana 14,2024-05-18,Chase Stadium,Inter Miami CF,D.C. United,1-0,90+4',Jugada individual al cierre
+2024,MLS,Semana 17,2024-05-29,Chase Stadium,Inter Miami CF,Atlanta United,1-3,62',Tiro cruzado bajo
+2024,MLS,Semana 18,2024-06-01,Chase Stadium,Inter Miami CF,St. Louis City SC,3-3,25',Pared con Jordi Alba
+2024,MLS,Semana 32,2024-09-14,Chase Stadium,Inter Miami CF,Philadelphia Union,3-1,26',Enganche con derecha y zurdazo
+2024,MLS,Semana 32,2024-09-14,Chase Stadium,Inter Miami CF,Philadelphia Union,3-1,30',Pase de Alba al punto penal
+2024,MLS,Semana 35,2024-09-28,Chase Stadium,Inter Miami CF,Charlotte FC,1-1,67',Zurdazo con rosca desde media luna
+2024,MLS,Semana 36,2024-10-02,Lower.com Field,Inter Miami CF,Columbus Crew,3-2,45',Control de pecho y remate
+2024,MLS,Semana 36,2024-10-02,Lower.com Field,Inter Miami CF,Columbus Crew,3-2,45+5',Tiro libre impecable al angulo
+2024,MLS,Semana 38,2024-10-19,Chase Stadium,Inter Miami CF,New England Revolution,6-2,78',Tiro lejano colocado
+2024,MLS,Semana 38,2024-10-19,Chase Stadium,Inter Miami CF,New England Revolution,6-2,81',Taconazo de Suarez y definicion
+2024,MLS,Semana 38,2024-10-19,Chase Stadium,Inter Miami CF,New England Revolution,6-2,89',Volea tras pase de Cremaschi
+2024,MLS,Playoffs R1,2024-10-25,Chase Stadium,Inter Miami CF,Atlanta United,2-1,39',Zurdazo potente
+2024,MLS,Playoffs R1,2024-11-09,Chase Stadium,Inter Miami CF,Atlanta United,2-3,65',Cabezazo en el segundo palo
+2025,MLS,Semana 2,2025-03-01,Yankee Stadium,Inter Miami CF,New York City FC,2-1,29',Tiro libre al primer palo
+2025,MLS,Semana 4,2025-03-15,Mercedes-Benz Stadium,Inter Miami CF,Atlanta United,3-2,41',Remate desde el borde del area
+2025,MLS,Semana 4,2025-03-15,Mercedes-Benz Stadium,Inter Miami CF,Atlanta United,3-2,74',Picadita ante la salida del arquero
+2025,MLS,Semana 7,2025-04-05,Chase Stadium,Inter Miami CF,LA Galaxy,2-0,83',Zurdazo raso al rincon
+2025,MLS,Semana 9,2025-04-19,Chase Stadium,Inter Miami CF,Columbus Crew,3-1,33',Pared magistral
+2025,MLS,Semana 9,2025-04-19,Chase Stadium,Inter Miami CF,Columbus Crew,3-1,62',Tiro libre directo
+2025,MLS,Semana 12,2025-05-10,Saputo Stadium,Inter Miami CF,CF Montreal,2-2,52',Remate de primera
+2025,MLS,Semana 14,2025-05-24,Exploria Stadium,Inter Miami CF,Orlando City,4-2,18',Tiro cruzado potente
+2025,MLS,Semana 14,2025-05-24,Exploria Stadium,Inter Miami CF,Orlando City,4-2,77',Penal suave al medio
+2025,MLS,Semana 17,2025-06-14,BMO Field,Inter Miami CF,Toronto FC,1-0,45',Tiro libre por fuera de la barrera
+2025,MLS,Semana 20,2025-07-05,Soldier Field,Inter Miami CF,Chicago Fire,2-1,88',Remate ajustado
+2025,MLS,Semana 22,2025-07-19,Chase Stadium,Inter Miami CF,Austin FC,3-0,60',Volea desde fuera del area
+2025,MLS,Semana 26,2025-08-23,Audi Field,Inter Miami CF,D.C. United,3-1,14',Regate al defensor y zurdazo
+2025,MLS,Semana 26,2025-08-23,Audi Field,Inter Miami CF,D.C. United,3-1,85',Tiro libre curvado
+2025,MLS,Semana 29,2025-09-13,Subaru Park,Inter Miami CF,Philadelphia Union,2-1,38',Definicion rasante
+2025,MLS,Semana 31,2025-09-27,Providence Park,Inter Miami CF,Portland Timbers,1-1,71',Remate desde el punto penal
+2025,MLS,Semana 32,2025-10-04,TQL Stadium,Inter Miami CF,FC Cincinnati,3-2,22',Tiro colocado al angulo
+2025,MLS,Semana 32,2025-10-04,TQL Stadium,Inter Miami CF,FC Cincinnati,3-2,69',Anticipacion ofensiva
+2025,MLS,Semana 34,2025-10-18,Chase Stadium,Inter Miami CF,New York Red Bulls,2-0,54',Tiro libre raso
+2026,MLS,Semana 2,2026-03-07,BMO Stadium,Inter Miami CF,Los Angeles FC,2-1,49',Zurdazo raso al rincon
+2026,MLS,Semana 4,2026-03-21,Chase Stadium,Inter Miami CF,Orlando City,3-1,35',Pared corta y definicion
+2026,MLS,Semana 4,2026-03-21,Chase Stadium,Inter Miami CF,Orlando City,3-1,82',Tiro libre directo
+2026,MLS,Semana 7,2026-04-11,GEODIS Park,Inter Miami CF,Nashville SC,1-0,64',Remate desde media distancia
+2026,MLS,Semana 10,2026-05-02,Lumen Field,Inter Miami CF,Seattle Sounders,2-2,73',Vaselina magistral
+2026,MLS,Semana 12,2026-05-16,Chase Stadium,Inter Miami CF,New York Red Bulls,4-1,20',Tiro raso cruzado
+2026,MLS,Semana 12,2026-05-16,Chase Stadium,Inter Miami CF,New York Red Bulls,4-1,58',Tiro libre al primer palo
+2026,MLS,Semana 24,2026-08-15,Bank of America Stadium,Inter Miami CF,Charlotte FC,2-0,44',Zurdazo tras contragolpe
+2026,MLS,Semana 27,2026-09-05,Chase Stadium,Inter Miami CF,Columbus Crew,3-2,27',Tiro al angulo superior
+2026,MLS,Semana 27,2026-09-05,Chase Stadium,Inter Miami CF,Columbus Crew,3-2,80',Penal colocado
+2026,MLS,Semana 29,2026-09-19,Mercedes-Benz Stadium,Inter Miami CF,Atlanta United,1-1,53',Remate dentro del area
+2026,MLS,Semana 31,2026-10-03,Chase Stadium,Inter Miami CF,New England Revolution,3-1,31',Zurdazo raso al rincon
+2026,MLS,Semana 31,2026-10-03,Chase Stadium,Inter Miami CF,New England Revolution,3-1,76',Tiro libre con comba magistral

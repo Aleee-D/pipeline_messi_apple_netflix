@@ -432,7 +432,7 @@ class L_Cargar:
     y de recuperarlo para el análisis y graficación.
     """
 
-    def __init__(self, ruta_archivo_final: str = "datos_messi_apple_netflix.pkl"):
+    def __init__(self, ruta_archivo_final: str = "datos/datos_messi_apple_netflix.pkl"):
         self.ruta_archivo_final: str = ruta_archivo_final
 
     def guardar_datos_finales(self, df: pd.DataFrame) -> str:

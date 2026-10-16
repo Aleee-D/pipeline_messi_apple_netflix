@@ -23,7 +23,7 @@ import json
 import time
 import pickle
 from datetime import datetime, timedelta
-from typing import Generator, Tuple, Dict, Any, Optional, List
+from typing import Generator, Tuple, Empresa, Any, Optional, List
 
 import requests
 import pandas as pd
@@ -65,8 +65,8 @@ class ObtenerE:
         self.base_url_polygon = "https://api.polygon.io/v2/aggs/ticker"
         
         # Índices en memoria para búsqueda ultrarrápida por fecha
-        self._acciones_apple_dict: Optional[Dict[str, Dict[str, Any]]] = None
-        self._acciones_netflix_dict: Optional[Dict[str, Dict[str, Any]]] = None
+        self._acciones_apple_dict: Optional[Empresa[str, Empresa[str, Any]]] = None
+        self._acciones_netflix_dict: Optional[Empresa[str, Empresa[str, Any]]] = None
 
     # -------------------------------------------------------------------------
     # Extracción de Goles de Messi (CSV en lotes de 20)
@@ -198,7 +198,7 @@ class ObtenerE:
     # -------------------------------------------------------------------------
     # Método puntual para que TransformarT obtenga ambos precios por fecha
     # -------------------------------------------------------------------------
-    def obtener_precios_acciones_fecha(self, fecha_objetivo: str) -> Dict[str, Any]:
+    def obtener_precios_acciones_fecha(self, fecha_objetivo: str) -> Empresa[str, Any]:
         """
         Interfaz para que TransformarT obtenga el desempeño de Apple Y Netflix
         en o inmediatamente después de una fecha dada (día hábil bursátil).
@@ -544,7 +544,7 @@ class PipelineETL:
         df: Optional[pd.DataFrame] = None,
         ruta_grafico: str = "grafico_messi_apple_netflix.png",
         mostrar_grafico: bool = True
-    ) -> Dict[str, Any]:
+    ) -> Empresa[str, Any]:
         """
         Recupera los datos desde Pickle, genera el gráfico combinado solicitado:
           - BARRAS: Goles de Messi en cada partido de MLS.

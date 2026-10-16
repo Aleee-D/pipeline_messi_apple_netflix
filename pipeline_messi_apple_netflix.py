@@ -86,7 +86,7 @@ class E_Obtener:
         self.fecha_inicio: str = "2023-01-01"
         self.fecha_fin: str = "2026-12-31"
         self.batch_size: int = 20
-        self.api_key: str = "8l9wv9ICO6LtyeWpxqf9kNrtyYRcQFXA"
+        self.api_key: str = "sm78IeMP6Dr123SI2mo105gwAzFmwX1k"
         self.url_base_polygon: str = "https://api.polygon.io/v2/aggs/ticker"
 
         # 2. Diccionario de instancia con los tickers y sus carpetas asociadas
@@ -108,7 +108,7 @@ class E_Obtener:
         # Configuración de rutas para datos de Messi
         self.info_messi: Dict[str, str] = {
             "carpeta": os.path.join("datos", "messi"),
-            "ruta_csv_origen": "datos_goles_messi.csv",
+            "ruta_csv_origen": os.path.join("datos", "messi", "datos_goles_messi.csv"),
             "ruta_intermedia": os.path.join("datos", "messi", "goles_messi_intermedio.pkl")
         }
 
@@ -157,15 +157,15 @@ class E_Obtener:
     # -------------------------------------------------------------------------
     # Extracción de Datos desde Polygon.io (Recibe un elemento del diccionario)
     # -------------------------------------------------------------------------
-    def obtener_datos_polygon(self, activo: Dict[str, str]) -> pd.DataFrame:
+    def obtener_datos_polygon(self, empresa: Dict[str, str]) -> pd.DataFrame:
         """
         Obtiene los datos desde la API de Polygon.io utilizando su iterador nativo.
         Recibe como parámetro un elemento del diccionario 'self.activos',
         por lo que no se requiere validar ningún string ingresado.
         """
-        ticker = activo["ticker"]
-        ruta_intermedia = activo["ruta_intermedia"]
-        print(f"[E_Obtener] Extrayendo desde fuente Polygon.io para activo '{ticker}' (carpeta: '{activo['carpeta']}')...")
+        ticker = empresa["ticker"]
+        ruta_intermedia = empresa["ruta_intermedia"]
+        print(f"[E_Obtener] Extrayendo desde fuente Polygon.io para activo '{ticker}' (carpeta: '{empresa['carpeta']}')...")
 
         registros = []
         try:
@@ -174,24 +174,24 @@ class E_Obtener:
                 ticker=ticker,
                 multiplier=1,
                 timespan="day",
-                from_="2024-10-15",
-                to="2026-10-15",
-                limit=self.batch_size
+                #from_="2024-10-15",
+                from_= self.fecha_inicio,
+                #to="2026-10-15",
+                to= self.fecha_fin
             )
 
-            # Iterar controladamente en bloques de 20 registros sin yield
-            for _ in range(self.batch_size * 2):
+            
+            for agg in aggs_iter:
                 try:
-                    agg = next(aggs_iter)
                     dt_str = pd.to_datetime(agg.timestamp, unit="ms").strftime("%Y-%m-%d")
                     registros.append({
                         "fecha": dt_str,
-                        "timestamp": agg.timestamp,
-                        "apertura": float(agg.open),
+                        #"timestamp": agg.timestamp,
+                        #"apertura": float(agg.open),
                         "cierre": float(agg.close),
-                        "maximo": float(agg.high),
-                        "minimo": float(agg.low),
-                        "volumen": int(agg.volume)
+                        #"maximo": float(agg.high),
+                        #"minimo": float(agg.low),
+                        #"volumen": int(agg.volume)
                     })
                 except StopIteration:
                     break
@@ -201,69 +201,15 @@ class E_Obtener:
 
         except Exception as err:
             print(f"  [E_Obtener] Aviso sobre API Polygon.io ({ticker}): {err}")
+        
+        df_empresa = pd.DataFrame(registros)
 
-        # Integrar puntos de referencia históricos para el período 2023-2024
-        # para que existan puntos base conocidos a lo largo de todo el rango temporal
-        puntos_base = self._obtener_puntos_base_historicos(ticker)
-        df_puntos_base = pd.DataFrame(puntos_base)
-
-        if registros:
-            df_live = pd.DataFrame(registros)
-            df_combinado = pd.concat([df_puntos_base, df_live], ignore_index=True)
-            df_combinado = df_combinado.drop_duplicates(subset=["fecha"]).sort_values(by="fecha").reset_index(drop=True)
-        else:
-            df_combinado = df_puntos_base
+        if(df_empresa.empty):
+            raise ValueError(f"No se encontraron datos de {ticker} en el período especificado {self.fecha_inicio} - {self.fecha_fin}.")
 
         # Guardar en el archivo intermedio de esta fuente
-        self.guardar_intermedio(df_combinado, ruta_intermedia)
-        return df_combinado
-
-    def _obtener_puntos_base_historicos(self, ticker: str) -> list:
-        """Puntos base de anclaje para permitir la aproximación lineal en el período 2023-2026."""
-        if ticker == "AAPL":
-            return [
-                {"fecha": "2023-01-03", "cierre": 125.07, "volumen": 112000000},
-                {"fecha": "2023-05-01", "cierre": 169.59, "volumen": 52400000},
-                {"fecha": "2023-07-21", "cierre": 191.94, "volumen": 71900000},
-                {"fecha": "2023-08-25", "cierre": 178.61, "volumen": 51400000},
-                {"fecha": "2023-08-28", "cierre": 180.19, "volumen": 48000000},
-                {"fecha": "2023-12-29", "cierre": 192.53, "volumen": 42600000},
-                {"fecha": "2024-02-23", "cierre": 182.52, "volumen": 45100000},
-                {"fecha": "2024-03-01", "cierre": 179.66, "volumen": 73500000},
-                {"fecha": "2024-04-19", "cierre": 165.00, "volumen": 67700000},
-                {"fecha": "2024-05-03", "cierre": 183.38, "volumen": 163000000},
-                {"fecha": "2024-06-12", "cierre": 213.07, "volumen": 198000000},
-                {"fecha": "2024-09-13", "cierre": 222.50, "volumen": 58000000},
-                {"fecha": "2024-10-02", "cierre": 226.78, "volumen": 48000000},
-                {"fecha": "2024-10-15", "cierre": 233.85, "volumen": 64750000},
-                {"fecha": "2025-01-02", "cierre": 243.85, "volumen": 52000000},
-                {"fecha": "2025-06-14", "cierre": 255.40, "volumen": 49000000},
-                {"fecha": "2026-01-02", "cierre": 271.01, "volumen": 56000000},
-                {"fecha": "2026-08-03", "cierre": 303.42, "volumen": 75050000},
-                {"fecha": "2026-10-15", "cierre": 324.50, "volumen": 45000000}
-            ]
-        else: # NFLX
-            return [
-                {"fecha": "2023-01-03", "cierre": 29.80, "volumen": 45000000},
-                {"fecha": "2023-05-01", "cierre": 32.50, "volumen": 42000000},
-                {"fecha": "2023-07-21", "cierre": 42.50, "volumen": 58000000},
-                {"fecha": "2023-08-25", "cierre": 41.60, "volumen": 39000000},
-                {"fecha": "2023-08-28", "cierre": 41.80, "volumen": 41000000},
-                {"fecha": "2023-12-29", "cierre": 48.60, "volumen": 35000000},
-                {"fecha": "2024-02-23", "cierre": 58.30, "volumen": 48000000},
-                {"fecha": "2024-03-01", "cierre": 61.90, "volumen": 45000000},
-                {"fecha": "2024-04-19", "cierre": 55.50, "volumen": 68000000},
-                {"fecha": "2024-05-03", "cierre": 59.20, "volumen": 38000000},
-                {"fecha": "2024-06-12", "cierre": 66.50, "volumen": 35000000},
-                {"fecha": "2024-09-13", "cierre": 70.10, "volumen": 31000000},
-                {"fecha": "2024-10-15", "cierre": 70.598, "volumen": 29327520},
-                {"fecha": "2024-10-18", "cierre": 76.389, "volumen": 159741190},
-                {"fecha": "2025-01-02", "cierre": 88.673, "volumen": 38000000},
-                {"fecha": "2025-06-14", "cierre": 93.10, "volumen": 33000000},
-                {"fecha": "2026-01-02", "cierre": 90.99, "volumen": 41000000},
-                {"fecha": "2026-08-03", "cierre": 101.50, "volumen": 35000000},
-                {"fecha": "2026-10-15", "cierre": 106.80, "volumen": 36000000}
-            ]
+        self.guardar_intermedio(df_empresa, ruta_intermedia)
+        return df_empresa
 
     # -------------------------------------------------------------------------
     # Extracción Exclusiva de Fechas de Goles de Messi en MLS (Filtro Requerido)
@@ -271,7 +217,7 @@ class E_Obtener:
     def extraer_goles_messi_intermedio(self) -> pd.DataFrame:
         """
         Lee el archivo CSV de goles de Messi iterando en bloques de self.batch_size
-        mediante la variable interna de instancia (sin yield),
+        mediante la variable interna de instancia,
         filtrando EXCLUSIVAMENTE los goles de Messi en la MLS en el período evaluado,
         y extrayendo las fechas correspondientes para el archivo intermedio.
         """
@@ -284,42 +230,20 @@ class E_Obtener:
 
         df_completo = pd.read_csv(ruta_csv)
         total_filas = len(df_completo)
-        bloques_filtrados = []
+        
+        # FILTRO SOLICITADO: Solo goles en MLS y sus fechas dentro del rango 2023-2026
+        if "Fecha" in df_completo.columns and "Competicion" in df_completo.columns:
+            df_completo["Fecha"] = pd.to_datetime(df_completo["Fecha"], errors="coerce").dt.strftime("%Y-%m-%d")
+            mascara_mls = df_completo["Competicion"].str.upper() == "MLS"
+            mascara_fechas = (df_completo["Fecha"] >= self.fecha_inicio) & (df_completo["Fecha"] <= self.fecha_fin)
+            bloque_mls = df_completo[mascara_mls & mascara_fechas][["Fecha", "Competicion"]].copy()
+    
+        print(f"[E_Obtener] Filtro MLS aplicado en la extracción: {len(bloque_mls)} registros de goles en MLS obtenidos.")
 
-        self.posicion_actual_goles = 0
-        while self.posicion_actual_goles < total_filas:
-            inicio = self.posicion_actual_goles
-            fin = min(inicio + self.batch_size, total_filas)
-            bloque = df_completo.iloc[inicio:fin].copy()
-            self.posicion_actual_goles = fin
-
-            # Limpieza básica de columnas
-            bloque.columns = [c.strip() for c in bloque.columns]
-            for col in ["Competicion", "Adversario", "Resultado", "Minuto"]:
-                if col in bloque.columns:
-                    bloque[col] = bloque[col].astype(str).str.strip()
-
-            # FILTRO SOLICITADO: Solo goles en MLS y sus fechas dentro del rango 2023-2026
-            if "Fecha" in bloque.columns and "Competicion" in bloque.columns:
-                bloque["Fecha"] = pd.to_datetime(bloque["Fecha"], errors="coerce").dt.strftime("%Y-%m-%d")
-                mascara_mls = bloque["Competicion"].str.upper() == "MLS"
-                mascara_fechas = (bloque["Fecha"] >= self.fecha_inicio) & (bloque["Fecha"] <= self.fecha_fin)
-                bloque_mls = bloque[mascara_mls & mascara_fechas][["Fecha", "Adversario", "Resultado", "Minuto", "Competicion"]].copy()
-
-                if not bloque_mls.empty:
-                    bloques_filtrados.append(bloque_mls)
-
-            print(f"  -> [E_Obtener] Bloque leído (filas {inicio} a {fin}). Variable interna: {self.posicion_actual_goles}")
-
-        if not bloques_filtrados:
-            df_goles_mls = pd.DataFrame(columns=["Fecha", "Adversario", "Resultado", "Minuto", "Competicion"])
-        else:
-            df_goles_mls = pd.concat(bloques_filtrados, ignore_index=True)
-
-        print(f"[E_Obtener] Filtro MLS aplicado en la extracción: {len(df_goles_mls)} registros de goles en MLS obtenidos.")
+        
         # Guardar en archivo intermedio de Messi
-        self.guardar_intermedio(df_goles_mls, ruta_intermedia)
-        return df_goles_mls
+        self.guardar_intermedio(bloque_mls, ruta_intermedia)
+        return bloque_mls
 
 
 # =============================================================================
@@ -355,11 +279,6 @@ class T_Transformar:
         print("[T_Transformar] Ejecutando 'rellenar_datos_faltantes_messi'...")
         df = df_messi_intermedio.copy()
 
-        # Rellenar cualquier campo de texto nulo
-        df["Adversario"] = df["Adversario"].fillna("Rival N/D")
-        df["Resultado"] = df["Resultado"].fillna("0-0")
-        df["Minuto"] = df["Minuto"].fillna("N/D")
-
         # Cada fila extraída representa 1 gol anotado en MLS
         df["Goles"] = 1
 
@@ -367,10 +286,7 @@ class T_Transformar:
         # GROUPBY DE PANDAS SOBRE FECHAS SUMANDO GOLES
         # =====================================================================
         df_goles_sumados = df.groupby("Fecha", as_index=False).agg(
-            Goles_Messi=("Goles", "sum"),
-            Oponente=("Adversario", "first"),
-            Resultado=("Resultado", "first"),
-            Minutos_Goles=("Minuto", lambda m: ", ".join(m.astype(str)))
+            Goles_Messi=("Goles", "sum")
         )
 
         # Homogenizar número entero de goles al menor tipo (int8)
@@ -381,29 +297,29 @@ class T_Transformar:
     # -------------------------------------------------------------------------
     # Método 2: Rellenar datos faltantes para APPLE (APROXIMACIÓN LINEAL)
     # -------------------------------------------------------------------------
-    def rellenar_datos_faltantes_apple(self, df_apple_obtenido: pd.DataFrame) -> pd.DataFrame:
+    def rellenar_datos_faltantes_apple(self, df_apple_obtenido: pd.DataFrame, df_goles_sumados: pd.DataFrame) -> pd.DataFrame:
         """
         Rellena los valores bursátiles de Apple mediante APROXIMACIONES LINEALES
         entre los días que tienen valor sobre los valores NaN del dataframe
         con los datos obtenidos en E_Obtener.
         """
         print("[T_Transformar] Ejecutando 'rellenar_datos_faltantes_apple' con aproximación lineal sobre NaNs...")
-        fechas_habiles = pd.date_range(start=self.fecha_inicio, end=self.fecha_fin, freq="B")
-        df_calendario = pd.DataFrame({"fecha": fechas_habiles.strftime("%Y-%m-%d")})
+
+        if ("Fecha" in df_goles_sumados):
+            df_goles_sumados.rename(columns={"Fecha": "fecha"}, inplace=True)
+        
+        if(df_apple_obtenido.empty):
+            raise ValueError("No se encontraron datos de Apple en el período especificado.")
 
         # Combinar calendario con los datos obtenidos en E_Obtener (los días sin cotización serán NaN)
-        df_con_nans = df_calendario.merge(df_apple_obtenido[["fecha", "cierre", "volumen"]], on="fecha", how="left")
+        df_con_nans = pd.merge(df_apple_obtenido,df_goles_sumados[["fecha"]], on="fecha", how="outer")
 
         # =====================================================================
         # APROXIMACIÓN LINEAL ENTRE DÍAS CON VALOR SOBRE LOS VALORES NaN
         # =====================================================================
         df_con_nans["cierre"] = df_con_nans["cierre"].interpolate(method="linear").bfill().ffill()
-        df_con_nans["volumen"] = df_con_nans["volumen"].interpolate(method="linear").bfill().ffill()
-
         df_con_nans["cierre"] = np.round(df_con_nans["cierre"], 2)
-        df_con_nans["volumen"] = np.round(df_con_nans["volumen"])
-        df_con_nans["variacion_porc"] = np.round(df_con_nans["cierre"].pct_change().fillna(0.0) * 100, 2)
-
+        
         # Homogenizar enteros para minimizar consumo de RAM
         df_resultado = optimizar_enteros_ram(df_con_nans)
         print(f"  -> [T_Transformar] Apple: {len(df_resultado)} días completados por aproximación lineal.")
@@ -412,29 +328,30 @@ class T_Transformar:
     # -------------------------------------------------------------------------
     # Método 3: Rellenar datos faltantes para NETFLIX (APROXIMACIÓN LINEAL)
     # -------------------------------------------------------------------------
-    def rellenar_datos_faltantes_netflix(self, df_netflix_obtenido: pd.DataFrame) -> pd.DataFrame:
+    def rellenar_datos_faltantes_netflix(self, df_netflix_obtenido: pd.DataFrame, df_goles_sumados: pd.DataFrame) -> pd.DataFrame:
         """
         Rellena los valores bursátiles de Netflix mediante APROXIMACIONES LINEALES
         entre los días que tienen valor sobre los valores NaN del dataframe
         con los datos obtenidos en E_Obtener.
         """
         print("[T_Transformar] Ejecutando 'rellenar_datos_faltantes_netflix' con aproximación lineal sobre NaNs...")
-        fechas_habiles = pd.date_range(start=self.fecha_inicio, end=self.fecha_fin, freq="B")
-        df_calendario = pd.DataFrame({"fecha": fechas_habiles.strftime("%Y-%m-%d")})
 
+        if ("Fecha" in df_goles_sumados):
+            df_goles_sumados.rename(columns={"Fecha": "fecha"}, inplace=True)
+        
+        print("pasa")
         # Combinar calendario con los datos obtenidos en E_Obtener
-        df_con_nans = df_calendario.merge(df_netflix_obtenido[["fecha", "cierre", "volumen"]], on="fecha", how="left")
-
+        if(df_netflix_obtenido.empty):
+            raise ValueError("No se encontraron datos de Netflix en el período especificado.")
+        
+        df_con_nans = pd.merge(df_netflix_obtenido,df_goles_sumados[["fecha"]], on="fecha", how="outer")
+        print("pasa 2")
         # =====================================================================
         # APROXIMACIÓN LINEAL ENTRE DÍAS CON VALOR SOBRE LOS VALORES NaN
         # =====================================================================
         df_con_nans["cierre"] = df_con_nans["cierre"].interpolate(method="linear").bfill().ffill()
-        df_con_nans["volumen"] = df_con_nans["volumen"].interpolate(method="linear").bfill().ffill()
-
         df_con_nans["cierre"] = np.round(df_con_nans["cierre"], 2)
-        df_con_nans["volumen"] = np.round(df_con_nans["volumen"])
-        df_con_nans["variacion_porc"] = np.round(df_con_nans["cierre"].pct_change().fillna(0.0) * 100, 2)
-
+       
         df_resultado = optimizar_enteros_ram(df_con_nans)
         print(f"  -> [T_Transformar] Netflix: {len(df_resultado)} días completados por aproximación lineal.")
         return df_resultado
@@ -457,15 +374,15 @@ class T_Transformar:
 
         # 1. Relleno por fuente con aproximaciones lineales
         df_goles = self.rellenar_datos_faltantes_messi(df_messi_intermedio)
-        df_apple = self.rellenar_datos_faltantes_apple(df_apple_intermedio)
-        df_netflix = self.rellenar_datos_faltantes_netflix(df_netflix_intermedio)
-
+        df_apple = self.rellenar_datos_faltantes_apple(df_apple_intermedio, df_goles)
+        df_netflix = self.rellenar_datos_faltantes_netflix(df_netflix_intermedio, df_goles)
+        
         dict_aapl = df_apple.set_index("fecha").to_dict(orient="index")
         dict_nflx = df_netflix.set_index("fecha").to_dict(orient="index")
 
         filas_cruce = []
         for _, fila in df_goles.iterrows():
-            fecha_partido = fila["Fecha"]
+            fecha_partido = fila["fecha"]
             dt_obj = datetime.strptime(fecha_partido, "%Y-%m-%d")
 
             # Buscar fecha bursátil más cercana
@@ -489,17 +406,10 @@ class T_Transformar:
             filas_cruce.append({
                 "Fecha_Partido": fecha_partido,
                 "Fecha_Bursatil": fecha_bursatil,
-                "Oponente": fila["Oponente"],
-                "Resultado": fila["Resultado"],
                 "Goles_Messi": fila["Goles_Messi"],
-                "Minutos_Goles": fila["Minutos_Goles"],
                 # VALORES DE CIERRE DE LAS ACCIONES
                 "Apple_Precio_Cierre": float(info_aapl["cierre"]) if info_aapl else np.nan,
-                "Apple_Variacion_Porc": float(info_aapl.get("variacion_porc", 0.0)) if info_aapl else 0.0,
-                "Apple_Volumen": int(info_aapl.get("volumen", 0)) if info_aapl else 0,
-                "Netflix_Precio_Cierre": float(info_nflx["cierre"]) if info_nflx else np.nan,
-                "Netflix_Variacion_Porc": float(info_nflx.get("variacion_porc", 0.0)) if info_nflx else 0.0,
-                "Netflix_Volumen": int(info_nflx.get("volumen", 0)) if info_nflx else 0
+                "Netflix_Precio_Cierre": float(info_nflx["cierre"]) if info_nflx else np.nan
             })
 
         df_final = pd.DataFrame(filas_cruce)
@@ -587,45 +497,74 @@ class PipelineETL:
         print("=" * 80)
 
         # ---------------------------------------------------------------------
-        # FASE 1: E_Obtener genera archivos intermedios para cada fuente
+        # Configuración del pipeline
         # ---------------------------------------------------------------------
-        print("\n[Fase 1 - Extracción y Archivos Intermedios (E_Obtener)]")
+        ObtenerDatos = False
+        TransformarDatos = True
+        CargarDatos = True
 
-        # Pasar directamente los elementos del diccionario 'self.extractor.activos'
-        for ticker_key, activo_dict in self.extractor.activos.items():
-            self.extractor.obtener_datos_polygon(activo_dict)
 
-        # Extraer exclusivamente goles de Messi en MLS y generar intermedio
-        self.extractor.extraer_goles_messi_intermedio()
+        if (ObtenerDatos == True):    
+            # ---------------------------------------------------------------------
+            # FASE 1: E_Obtener genera archivos intermedios para cada fuente
+            # ---------------------------------------------------------------------
+            print("\n[Fase 1 - Extracción y Archivos Intermedios (E_Obtener)]")
 
-        # ---------------------------------------------------------------------
-        # FASE 2: T_Transformar carga intermedios, aplica aproximaciones lineales y transforma
-        # ---------------------------------------------------------------------
-        print("\n[Fase 2 - Carga de Intermedios y Transformación (T_Transformar)]")
+            # Pasar directamente los elementos del diccionario 'self.extractor.activos'
+            for ticker_key, activo_dict in self.extractor.activos.items():
+                self.extractor.obtener_datos_polygon(activo_dict)
 
-        # Cargar los intermedios usando los métodos de E_Obtener
-        df_messi_inter = self.extractor.obtener_intermedio(self.extractor.info_messi["ruta_intermedia"])
-        df_apple_inter = self.extractor.obtener_intermedio(self.extractor.activos["AAPL"]["ruta_intermedia"])
-        df_netflix_inter = self.extractor.obtener_intermedio(self.extractor.activos["NFLX"]["ruta_intermedia"])
+            # Extraer exclusivamente goles de Messi en MLS y generar intermedio
+            self.extractor.extraer_goles_messi_intermedio()
+        else:
+            print("\n[Fase 1 - Extracción y Archivos Intermedios (E_Obtener)] SALTEADA")
 
-        # Transformar aplicando aproximaciones lineales sobre los datos obtenidos
-        df_final = self.transformador.transformar_datos(
-            df_messi_intermedio=df_messi_inter,
-            df_apple_intermedio=df_apple_inter,
-            df_netflix_intermedio=df_netflix_inter
-        )
+        if (TransformarDatos == True):
+            # ---------------------------------------------------------------------
+            # FASE 2: T_Transformar carga intermedios, aplica aproximaciones lineales y transforma
+            # ---------------------------------------------------------------------
+            print("\n[Fase 2 - Carga de Intermedios y Transformación (T_Transformar)]")
 
-        # ---------------------------------------------------------------------
-        # FASE 3: L_Cargar persiste y valida el archivo final
-        # ---------------------------------------------------------------------
-        print("\n[Fase 3 - Persistencia del Dataset Final (L_Cargar)]")
-        self.cargador.guardar_datos_finales(df_final)
-        df_recuperado = self.cargador.cargar_datos_finales()
+            # Cargar los intermedios usando los métodos de E_Obtener
+            df_messi_inter = self.extractor.obtener_intermedio(self.extractor.info_messi["ruta_intermedia"])
+            df_apple_inter = self.extractor.obtener_intermedio(self.extractor.activos["AAPL"]["ruta_intermedia"])
+            df_netflix_inter = self.extractor.obtener_intermedio(self.extractor.activos["NFLX"]["ruta_intermedia"])
+
+            print(df_messi_inter)
+            print(df_apple_inter)
+
+            # Transformar aplicando aproximaciones lineales sobre los datos obtenidos
+            df_final = self.transformador.transformar_datos(
+                df_messi_intermedio=df_messi_inter,
+                df_apple_intermedio=df_apple_inter,
+                df_netflix_intermedio=df_netflix_inter
+            )
+        else:
+            print("\n[Fase 2 - Carga de Intermedios y Transformación (T_Transformar)] SALTEADA")
+
+        if (CargarDatos == True):
+            # ---------------------------------------------------------------------
+            # FASE 3: L_Cargar persiste y valida el archivo final
+            # ---------------------------------------------------------------------
+            print("\n[Fase 3 - Persistencia del Dataset Final (L_Cargar)]")
+            self.cargador.guardar_datos_finales(df_final)
+
+            df_recuperado = self.cargador.cargar_datos_finales()
+
+            print("\n" + "=" * 80)
+            print("SE RECUPERARON LOS DATOS PROSESADOS")
+            print("=" * 80)
+        
+            return df_recuperado
+        else:
+            print("\n[Fase 3 - Persistencia del Dataset Final (L_Cargar)] SALTEADA")
+
 
         print("\n" + "=" * 80)
-        print("PIPELINE ETL EJECUTADO EXITOSAMENTE")
+        print("PIPELINE ETL FINALIZADO")
         print("=" * 80)
-        return df_recuperado
+        
+        return None
 
     def generar_grafico_conjunto(self) -> Dict[str, Any]:
         """
@@ -734,15 +673,6 @@ class PipelineETL:
             "netflix_r2": reg_netflix.rvalue ** 2,
             "netflix_pvalue": reg_netflix.pvalue
         }
-
-
-# =============================================================================
-# ALIAS PARA RETROCOMPATIBILIDAD
-# =============================================================================
-ObtenerE = E_Obtener
-TransformarT = T_Transformar
-TrasnformarT = T_Transformar
-CargarL = L_Cargar
 
 
 # =============================================================================

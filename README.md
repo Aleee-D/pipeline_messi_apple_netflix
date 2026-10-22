@@ -85,15 +85,6 @@ flowchart TD
 
 ---
 
-## 📊 Resultados Estadísticos (2023 - 2026)
-
-| Activo Bursátil | Métrica Evaluada | Coeficiente $R^2$ | P-valor ($p$) | Veredicto |
-| :--- | :--- | :--- | :--- | :--- |
-| **Apple (AAPL)** | Valor de Cierre vs Goles | $0.0054$ ($0.54\%$) | $0.6509$ | ❌ Hipótesis Refutada |
-| **Netflix (NFLX)** | Valor de Cierre vs Goles | $0.0054$ ($0.54\%$) | $0.6509$ | ❌ Hipótesis Refutada |
-
----
-
 ## 🚀 Ejecución
 
 ```powershell
